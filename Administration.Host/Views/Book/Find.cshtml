@@ -1,0 +1,81 @@
+﻿@model Administration.Host.Models.Books.BookDetailsViewModel
+
+@{
+    ViewData["Title"] = "Find";
+}
+
+<h1>Find</h1>
+
+<div>
+    <h4>BookDetailsViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AuthorId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AuthorId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Жанры книги</h4>
+    <div class="list-group">
+        @foreach (var genre in Model.Genres)
+        {
+            <div class="d-flex justify-content-between">
+                <a href="https://localhost:7270/Genre/Find?genreId=@genre.Id" class="list-group-item list-group-item-action active mr-4" aria-current="false">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@genre.Name</h5>
+                    </div>
+                    <p class="mb-1">@genre.Status</p>
+                    <small>@genre.Description</small>
+                </a>
+                <a class="btn btn-primary btn-sm ml-4" href="https://localhost:7270/Book/UntieGenre?bookId=@Model.Id&genreId=@genre.Id">Отвязать</a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Изменить", "Update", new {  bookId=Model.Id } ) |
+    <a href="https://localhost:7270/Book/BindGenre?bookId=@Model.Id" class="btn btn-primary btn-sm">Добавить жанр</a>
+    <a asp-Action="Filtred" asp-controller="Book"> Вернуться к списку</a>
+</div>

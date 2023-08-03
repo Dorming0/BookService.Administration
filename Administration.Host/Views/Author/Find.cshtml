@@ -1,0 +1,85 @@
+﻿@model Administration.Host.Models.Authors.AuthorDetailsViewModel
+
+@{
+    ViewData["Title"] = "FindAsync";
+}
+
+<h1>FindAsync</h1>
+
+
+<div class="d-flex justify-content-between">
+    <div>
+        <h4>Данные автора</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+     
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Surname)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Surname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <h4>Книги автора</h4>
+        <div class="list-group">
+            @foreach(var book in Model.Books)
+            {
+                <a href="https://localhost:7270/Book/Find?bookId=@book.Id" class="list-group-item list-group-item-action active" aria-current="false">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@book.Name</h5>
+                        <small>@book.Price</small>
+                    </div>
+                    <p class="mb-1">@book.Status</p>
+                    <small>And some small print.</small>
+                </a>
+            }
+        </div>
+    </div>
+    <div>
+        <h4>Жанры автора</h4>
+        <div class="list-group">
+            @foreach (var genre in Model.Genres)
+            {
+                <a href="https://localhost:7270/Book/Find?bookId=@genre.Id" class="list-group-item list-group-item-action active" aria-current="false">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@genre.Name</h5>
+                    </div>
+                    <p class="mb-1">@genre.Status</p>
+                    <small>And some small print.</small>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Изменить", "Update", new { authorId = Model.Id }) |
+    <a asp-Action="Filtred" asp-controller="Author"> Вернуться к списку</a>
+</div>

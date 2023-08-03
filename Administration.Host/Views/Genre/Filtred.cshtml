@@ -1,0 +1,49 @@
+﻿@model Administration.Host.Models.Genres.GenreFiltredResultViewModel
+
+@{
+    ViewData["Title"] = "Filtred";
+}
+
+<h1>Filtred</h1>
+
+<p>
+    <a asp-action="Registration" asp-controller="Genre">Добавить</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPageCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Genres)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить", "Updata", new { genreId = item.Id }) |
+                    @Html.ActionLink("Подробнее", "Find", new { genreId = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { genreId = item.Id })|
+                    @Html.ActionLink("Изменить статус", "ChangeStatus", new { genreId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

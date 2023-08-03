@@ -1,0 +1,56 @@
+﻿@model Administration.Host.Models.Authors.AuthorFiltredResultViewModel
+
+@{
+    ViewData["Title"] = "Список авторов";
+}
+
+<h1>Список авторов</h1>
+
+<p>
+    <a asp-action="Registration" asp-controller="Author">Добавить</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Идентификатор
+            </th>
+            <th>
+                Имя
+            </th>
+            <th>
+                Фамилия
+            </th>
+            <th>
+                Статус
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить", "Update", new { authorId=item.Id }) |
+                    @Html.ActionLink("Подробнее", "Find", new { authorId=item.Id}) |
+                    @Html.ActionLink("Удалить", "Delete", new { authorId=item.Id })|
+                    @Html.ActionLink("Изменить статус", "ChangeStatus", new { authorId=item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
